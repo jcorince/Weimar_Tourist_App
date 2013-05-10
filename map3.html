@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+   <head>
+        <title>YOUR PATH TO THE TEATHER</title>
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+        <link rel="stylesheet" href="tourist.css" />
+        
+        <script type="text/javascript" src="cordova-2.6.0.js"></script>
+            app.initialize();
+        <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+        
+        <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3key=AIzaSyDbhBhs2UI7LtkSouUjkogovlq6AvKsgXE&sensor=true&language=en"></script>
+         <script type="text/javascript" scr="map3.js"></script>   
+     <script type="text/javascript">
+
+            var map,
+                currentPosition,
+                directionsDisplay, 
+                directionsService,
+                destinationLatitude = 50.97989,
+                destinationLongitude = 11.32540;
+
+            function initializeMapAndCalculateRoute(lat, lon)
+            {
+                directionsDisplay = new google.maps.DirectionsRenderer(); 
+                directionsService = new google.maps.DirectionsService();
+
+                currentPosition = new google.maps.LatLng(lat, lon);
+
+                map = new google.maps.Map(document.getElementById('map_canvas'), {
+                   zoom: 15,
+                   center: currentPosition,
+                   mapTypeId: google.maps.MapTypeId.ROADMAP
+                 });
+
+                directionsDisplay.setMap(map);
+
+                 var currentPositionMarker = new google.maps.Marker({
+                    position: currentPosition,
+                    map: map,
+                    title: "Current position"
+                });
+
+                // current position marker info
+                /*
+                var infowindow = new google.maps.InfoWindow();
+                google.maps.event.addListener(currentPositionMarker, 'click', function() {
+                    infowindow.setContent("Current position: latitude: " + lat +" longitude: " + lon);
+                    infowindow.open(map, currentPositionMarker);
+                });
+                */
+
+                // calculate Route
+                calculateRoute();
+            }
+
+            function locError(error) {
+               // the current position could not be located
+            }
+
+            function locSuccess(position) {
+                // initialize map with current position and calculate the route
+                initializeMapAndCalculateRoute(position.coords.latitude, position.coords.longitude);
+            }
+
+            function calculateRoute() {
+
+                var targetDestination =  new google.maps.LatLng(destinationLatitude, destinationLongitude);
+                if (currentPosition != '' && targetDestination != '') {
+
+                    var request = {
+                        origin: currentPosition, 
+                        destination: targetDestination,
+                        travelMode: google.maps.DirectionsTravelMode["DRIVING"]
+                    };
+
+                    directionsService.route(request, function(response, status) {
+                        if (status == google.maps.DirectionsStatus.OK) {
+                            directionsDisplay.setPanel(document.getElementById("directions"));
+                            directionsDisplay.setDirections(response); 
+
+                            /*
+                                var myRoute = response.routes[0].legs[0];
+                                for (var i = 0; i < myRoute.steps.length; i++) {
+                                    alert(myRoute.steps[i].instructions);
+                                }
+                            */
+                            $("#results").show();
+                        }
+                        else {
+                            $("#results").hide();
+                        }
+                    });
+                }
+                else {
+                    $("#results").hide();
+                }
+            }
+
+            $(document).live("pagebeforeshow", "#map_page", function() {
+                // find current position and on success initialize map and calculate the route
+                navigator.geolocation.getCurrentPosition(locSuccess, locError);
+            });
+
+        </script>
+    </head>
+    <body>
+      <div id="basic-map" data-role="page">
+        <div data-role="header">
+          <h1>PATH</h1>
+        </div>
+        <div data-role="content">
+          <div class="ui-bar-c ui-corner-all ui-shadow" style="padding:1em;">
+            <div id="map_canvas" style="height:700px;"></div>
+          </div>
+          <div id="results" style="display:none;">
+            <div id="directions"></div>
+          </div>
+        </div>
+
+
+        <div id="footer">
+          <fieldset class="ui-grid-c">
+            <div class="ui-block-a">
+              <button type="submit" data-theme="a" onclick ="document.location.href ='index.html'">Home</button>
+            </div>
+            <div class="ui-block-b">
+              <button type="submit" data-theme="b" onclick ="document.location.href ='map3.html'">Map</button>
+            </div>
+            <div class="ui-block-c">
+              <button type="submit" data-theme="c" onclick ="document.location.href ='contact.html'">Contact</button>
+            </div>
+            <div class="ui-block-d">
+              <button type="submit" data-theme="d" onclick ="document.location.href ='about.html'">About</button>
+            </div>
+          </fieldset>
+        </div>
+      </div>		
+    </body>
+</html>
