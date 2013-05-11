@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+ <head>
+ <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript">      </script>
+ <script>
+ function appendheaderfooter(){
+ var header="<div style='position:fixed;top:0px;background-color:aqua;'>header html</div>";
+ var footer="<div style='position:fixed;bottom:0px;background-color:aqua;'>footer html</div>"
+ $("body").append(header+footer);
+}
+  window.onload = appendheaderfooter;
+</script>
+<style>
+div{width:100%;}
+</style>
+</head>
+<body><br/>
+<p>Content goes here</p>
+</body>
+</html>

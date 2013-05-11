@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Weimar Tour</title>
+	<head>
+		<title>Weimar Tour</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
       <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css" />
@@ -11,38 +11,34 @@
       <link rel="stylesheet" href="tourist.css" />
       <script src="tourist.js"></script>
     </meta>
-  </head>
+	</head>
 
-  <body>
+	<body>
     <div data-role="header" data-position="fixed">
-      Contact information
+      Welcome to weimar TheaterPlatz
     </div>
-    <div id="content">
-     
-        <h5>deutsches nationaltheater und staatskapelle weimar - staatstheater Thueringen
-        Theaterplatz
-        99423 Weimar
-        </h5>
-      
-        <h4 id="contentHeading" >Postadresse</h4>
-        Deutsches Nationaltheater und Staatskapelle Weimar GmbH
-        Staatstheater Thueringen Postfach 2003 & 2005<br></br>
-        D-99401 Weimar
-        <h4 id="contentHeading" >Talk to Us</h4>
-        Zentrale
-        Tel. 03643 - 755 0 <br />
+    <div class="gallery" align="center">
+      <h3>Some Pictures</h3>
+      <div class="thumbnails">
+        <img onmouseover="preview.src=img1.src" id="img1" src="t1.jpg" alt="Image Not Loaded"/>
+        <img onmouseover="preview.src=img2.src" id="img2" src="t2.jpg" alt="Image Not Loaded"/>
+        <img onmouseover="preview.src=img3.src" id="img3" src="t3.jpg" alt="Image Not Loaded"/>
+        <img onmouseover="preview.src=img4.src" id="img4" src="t4.jpg" alt="Image Not Loaded"/>
+        <img onmouseover="preview.src=img5.src" id="img5" src="t5.jpg" alt="Image Not Loaded"/>
+        <img onmouseover="preview.src=img6.src" id="img6" src="t6.jpg" alt="Image Not Loaded"/>
+      </div>
+      <br/>
 
-        Theaterkasse <br></br>
-        Tel. 03643  - 755 334<br></br>
-        Besucherservice<br></br>
-        Tel. 03643 - 755 334<br></br>
-        Fax 03643 - 755 321<br></br>
-      <h4 id="contentHeading" >Email</h4>
-        service@nationaltheater-weimar.de
-      
+      <div class="preview" align="center">
+        <img id="preview" src="t2.jpg" alt="problem loading image"></img>
 
+      </div>
+
+      <br/>
+
+      <h2 id="contentHeading">TheaterPlatz Weimar</h2>
     </div>
-
+		 
     <div data-role="footer" data-position="fixed" data-fullscreen ="true">
       <div id="footer">
         <fieldset class="ui-grid-c">
@@ -61,5 +57,5 @@
         </fieldset>
       </div>
     </div>
-  </body>
-</html>
+  		
+				</body>
